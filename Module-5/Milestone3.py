@@ -1,5 +1,5 @@
 #
-# Milestone3.py - This is the Python code template used to 
+# Milestone3.py - This is the Python code template used to
 # setup the structure for Milestone 3. In this milestone, you need
 # to demonstrate the capability to productively display a message
 # in Morse code utilizing the Red and Blue LEDs. The message should
@@ -8,19 +8,19 @@
 #
 # This code works with the test circuit that was built for module 5.
 #
-#------------------------------------------------------------------
+# ------------------------------------------------------------------
 #         Author         |         Date
-#------------------------------------------------------------------
+# ------------------------------------------------------------------
 # Christopher Davidson           10/5/2025
-#------------------------------------------------------------------
+# ------------------------------------------------------------------
 #
-#------------------------------------------------------------------
+# ------------------------------------------------------------------
 # Change History
-#------------------------------------------------------------------
+# ------------------------------------------------------------------
 # Version   |   Description
-#------------------------------------------------------------------
+# ------------------------------------------------------------------
 #    1          Initial Development
-#------------------------------------------------------------------
+# ------------------------------------------------------------------
 
 ##
 ## Imports required to handle our Button, and our LED devices
@@ -49,13 +49,14 @@ import adafruit_character_lcd.character_lcd as characterlcd
 from threading import Thread
 
 ##
-## DEBUG flag - boolean value to indicate whether or not to print 
+## DEBUG flag - boolean value to indicate whether or not to print
 ## status messages on the console of the program
-## 
+##
 DEBUG = True
 
+
 ##
-## ManagedDisplay - Class intended to manage the 16x2 
+## ManagedDisplay - Class intended to manage the 16x2
 ## Display
 ##
 class ManagedDisplay():
@@ -65,12 +66,12 @@ class ManagedDisplay():
     def __init__(self):
         ##
         ## Setup the six GPIO lines to communicate with the display.
-        ## This leverages the digitalio class to handle digital 
+        ## This leverages the digitalio class to handle digital
         ## outputs on the GPIO lines. There is also an analagous
         ## class for analog IO.
         ##
         ## You need to make sure that the port mappings match the
-        ## physical wiring of the display interface to the 
+        ## physical wiring of the display interface to the
         ## GPIO interface.
         ##
         ## compatible with all versions of RPI as of Jan. 2019
@@ -84,12 +85,12 @@ class ManagedDisplay():
 
         # Modify this if you have a different sized character LCD
         self.lcd_columns = 16
-        self.lcd_rows = 2 
+        self.lcd_rows = 2
 
         # Initialise the lcd class
-        self.lcd = characterlcd.Character_LCD_Mono(self.lcd_rs, self.lcd_en, 
-                    self.lcd_d4, self.lcd_d5, self.lcd_d6, self.lcd_d7, 
-                    self.lcd_columns, self.lcd_rows)
+        self.lcd = characterlcd.Character_LCD_Mono(self.lcd_rs, self.lcd_en,
+                                                   self.lcd_d4, self.lcd_d5, self.lcd_d6, self.lcd_d7,
+                                                   self.lcd_columns, self.lcd_rows)
 
         # wipe LCD screen before we start
         self.lcd.clear()
@@ -107,7 +108,7 @@ class ManagedDisplay():
         self.lcd_d5.deinit()
         self.lcd_d6.deinit()
         self.lcd_d7.deinit()
-        
+
     ##
     ## clear - Convenience method used to clear the display
     ##
@@ -121,16 +122,16 @@ class ManagedDisplay():
         self.lcd.clear()
         self.lcd.message = message
 
-    ## End class ManagedDisplay definition  
-    
+    ## End class ManagedDisplay definition
+
 
 ##
 ## CWMachine - This is our StateMachine implementation class.
-## The purpose of this state machine is to send a message in 
+## The purpose of this state machine is to send a message in
 ## morse code, blinking the red light for a dot, and the blue light
 ## for a dash.
 ##
-## A dot should be displayed for 500ms. 
+## A dot should be displayed for 500ms.
 ## A dash should be displayed for 1500ms.
 ## There should be a pause of 250ms between dots/dashes.
 ## There should be a pause of 750ms between letters.
@@ -172,7 +173,7 @@ class CWMachine(StateMachine):
     ##  letterPause - dark for 750ms
     ##  wordPause - dark for 3000ms
     ##
-    off = State(initial = True)
+    off = State(initial=True)
     dot = State()
     dash = State()
     dotDashPause = State()
@@ -189,19 +190,19 @@ class CWMachine(StateMachine):
     ## to convert any common string into Morse code.
     ##
     morseDict = {
-        "A" : ".-", "B" : "-...", "C" : "-.-.", "D" : "-..",
-        "E" : ".", "F" : "..-.", "G" : "--.", "H" : "....",
-        "I" : "..", "J" : ".---", "K" : "-.-", "L" : ".-..",
-        "M" : "--", "N" : "-.", "O" : "---", "P" : ".--.",
-        "Q" : "--.-", "R" : ".-.", "S" : "...", "T" : "-",
-        "U" : "..-", "V" : "...-", "W" : ".--", "X" : "-..-",
-        "Y" : "-.--", "Z" : "--..", "0" : "-----", "1" : ".----",
-        "2" : "..---", "3" : "...--", "4" : "....-", "5" : ".....",
-        "6" : "-....", "7" : "--...", "8" : "---..", "9" : "----.",
-        "+" : ".-.-.", "-" : "-....-", "/" : "-..-.", "=" : "-...-",
-        ":" : "---...", "." : ".-.-.-", "$" : "...-..-", "?" : "..--..",
-        "@" : ".--.-.", "&" : ".-...", "\"" : ".-..-.", "_" : "..--.-",
-        "|" : "--...-", "(" : "-.--.-", ")" : "-.--.-"
+        "A": ".-", "B": "-...", "C": "-.-.", "D": "-..",
+        "E": ".", "F": "..-.", "G": "--.", "H": "....",
+        "I": "..", "J": ".---", "K": "-.-", "L": ".-..",
+        "M": "--", "N": "-.", "O": "---", "P": ".--.",
+        "Q": "--.-", "R": ".-.", "S": "...", "T": "-",
+        "U": "..-", "V": "...-", "W": ".--", "X": "-..-",
+        "Y": "-.--", "Z": "--..", "0": "-----", "1": ".----",
+        "2": "..---", "3": "...--", "4": "....-", "5": ".....",
+        "6": "-....", "7": "--...", "8": "---..", "9": "----.",
+        "+": ".-.-.", "-": "-....-", "/": "-..-.", "=": "-...-",
+        ":": "---...", ".": ".-.-.-", "$": "...-..-", "?": "..--..",
+        "@": ".--.-.", "&": ".-...", "\"": ".-..-.", "_": "..--.-",
+        "|": "--...-", "(": "-.--.-", ")": "-.--.-"
     }
 
     ##
@@ -209,7 +210,7 @@ class CWMachine(StateMachine):
     ## and a 'dot'
     ##
     doDot = (
-        off.to(dot) | dot.to(off)
+            off.to(dot) | dot.to(off)
     )
 
     ##
@@ -217,7 +218,7 @@ class CWMachine(StateMachine):
     ## and a 'dash'
     ##
     doDash = (
-        off.to(dash) | dash.to(off)
+            off.to(dash) | dash.to(off)
     )
 
     ##
@@ -225,7 +226,7 @@ class CWMachine(StateMachine):
     ## and a pause between dots and dashes
     ##
     doDDP = (
-        off.to(dotDashPause) | dotDashPause.to(off)
+            off.to(dotDashPause) | dotDashPause.to(off)
     )
 
     ##
@@ -233,7 +234,7 @@ class CWMachine(StateMachine):
     ## and a pause between letters
     ##
     doLP = (
-        off.to(letterPause) | letterPause.to(off)
+            off.to(letterPause) | letterPause.to(off)
     )
 
     ##
@@ -241,7 +242,7 @@ class CWMachine(StateMachine):
     ## and a pause between words
     ##
     doWP = (
-        off.to(wordPause) | wordPause.to(off)
+            off.to(wordPause) | wordPause.to(off)
     )
 
     ##
@@ -252,7 +253,7 @@ class CWMachine(StateMachine):
         # Red light comes on for 500ms
         self.redLight.blink(on_time=0.5, off_time=0, n=1, background=False)
 
-        if(DEBUG):
+        if (DEBUG):
             print("* Changing state to red - dot")
 
     ##
@@ -271,7 +272,7 @@ class CWMachine(StateMachine):
         # Blue light comes on for 1500ms
         self.blueLight.blink(on_time=1.5, off_time=0, n=1, background=False)
 
-        if(DEBUG):
+        if (DEBUG):
             print("* Changing state to blue - dash")
 
     ##
@@ -283,14 +284,14 @@ class CWMachine(StateMachine):
         self.blueLight.off()
 
     ##
-    ## on_enter_dotDashPause - Action performed when the state machine 
+    ## on_enter_dotDashPause - Action performed when the state machine
     ## transitions into the dotDashPause state
     ##
     def on_enter_dotDashPause(self):
         # wait for 250ms
         sleep(0.250)
 
-        if(DEBUG):
+        if (DEBUG):
             print("* Pausing Between Dots/Dashes - 250ms")
 
     ##
@@ -301,14 +302,14 @@ class CWMachine(StateMachine):
         pass
 
     ##
-    ## on_enter_letterPause - Action performed when the state machine 
+    ## on_enter_letterPause - Action performed when the state machine
     ## transitions into the letterPause state
     ##
     def on_enter_letterPause(self):
         # wait for 750ms
         sleep(0.750)
 
-        if(DEBUG):
+        if (DEBUG):
             print("* Pausing Between Letters - 750ms")
 
     ##
@@ -319,14 +320,14 @@ class CWMachine(StateMachine):
         pass
 
     ##
-    ## on_enter_wordPause - Action performed when the state machine 
+    ## on_enter_wordPause - Action performed when the state machine
     ## transitions into the wordPause state
     ##
     def on_enter_wordPause(self):
         # wait for 3000ms
         sleep(3.000)
 
-        if(DEBUG):
+        if (DEBUG):
             print("* Pausing Between Words - 3000ms")
 
     ##
@@ -343,11 +344,11 @@ class CWMachine(StateMachine):
     def toggleMessage(self):
         self.activeMessage = self.message2 if self.activeMessage == self.message1 else self.message1
 
-        if(DEBUG):
+        if (DEBUG):
             print(f"* Toggling active message to: {self.activeMessage} ")
 
     ##
-    ## processButton - Utility method used to send events to the 
+    ## processButton - Utility method used to send events to the
     ## state machine. The only thing this event does is trigger
     ## a change in the outgoing message
     ##
@@ -361,7 +362,7 @@ class CWMachine(StateMachine):
     def run(self):
         myThread = Thread(target=self.transmit)
         myThread.start()
-        
+
     ##
     ## transmit - utility method used to continuously send a
     ## message
@@ -383,7 +384,7 @@ class CWMachine(StateMachine):
             lenWords = len(wordList)
             wordsCounter = 1
             for word in wordList:
-            
+
                 ## Setup counter to determine time buffer after letters
                 lenWord = len(word)
                 wordCounter = 1
@@ -436,8 +437,6 @@ class CWMachine(StateMachine):
         ## Cleanup the display i.e. clear it
         self.screen.cleanupDisplay()
 
-
-
     ## End class CWMachine definition
 
 
@@ -449,7 +448,7 @@ cwMachine.run()
 
 ##
 ## greenButton - setup our Button, tied to GPIO 24. Configure the
-## action to be taken when the button is pressed to be the 
+## action to be taken when the button is pressed to be the
 ## execution of the processButton function in our State Machine
 ##
 greenButton = Button(24)
@@ -468,22 +467,22 @@ repeat = True
 while repeat:
     try:
         ## Only display if the DEBUG flag is set
-        if(DEBUG):
+        if (DEBUG):
             print("Killing time in a loop...")
 
-        ## sleep for 20 seconds at a time. This value is not crucial, 
-        ## all of the work for this application is handled by the 
+        ## sleep for 20 seconds at a time. This value is not crucial,
+        ## all of the work for this application is handled by the
         ## Button.when_pressed event process
         sleep(20)
     except KeyboardInterrupt:
         ## Catch the keyboard interrupt (CTRL-C) and exit cleanly
-        ## we do not need to manually clean up the GPIO pins, the 
+        ## we do not need to manually clean up the GPIO pins, the
         ## gpiozero library handles that process.
         print("Cleaning up. Exiting...")
 
         ## Stop the loop
         repeat = False
-        
+
         ## Cleanly exit the state machine after completing the last message
         cwMachine.endTransmission = True
         sleep(1)
